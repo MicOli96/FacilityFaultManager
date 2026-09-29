@@ -1,56 +1,86 @@
-# Welcome to your Expo app 👋
+# Inlämning 1 React Native
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+**Kurs:** Applikationsutveckling (APP) SUVNET25
+**Arbetsform:** Individuellt
+**Utlämnad:** måndag 21 september 2026
+**Deadline:** onsdag 7 oktober 2026 20:00
+**Presentation:** onsdag 7 oktober 2026
+**Kompletteringsdeadline:** onsdag 28 oktober 2026 20:00
 
-## Get started
+---
 
-1. Install dependencies
+## Uppgiften
 
-   ```bash
-   npm install
-   ```
+Du ska individuellt skapa en nativ app med hjälp av React Native (RN), Expo och TypeScript. Vad du bygger är valfritt, välj något litet nog att bli färdigt och stort nog att vara intressant.
 
-2. Start the app
+Appen ska använda minst **4 komponenter från React Native** och minst **4 moduler från Expo SDK**.
 
-   ```bash
-   npx expo start
-   ```
+### Vad räknas som vad?
 
-In the output, you'll find options to open the app in a
+**React Native-komponenter**
+Byggstenarna som följer med RN självt. Du importerar dem från `react-native`.
+Exempelvis: `View`, `Text`, `Image`, `Pressable`, `TextInput`, `ScrollView`, `FlatList`, `Modal` & `Switch`.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+**Expo SDK-moduler**
+Paket som ger dig tillgång till telefonens funktioner. Du installerar dem med `npx expo install`.
+Exempelvis: `expo-location`, `expo-camera`, `expo-image-picker`, `expo-haptics`, `expo-notifications`, `expo-sensors`, `expo-file-system`.
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+Tänk på att `StyleSheet` är ett API, inte en komponent, och räknas inte. Expo Router räknas inte som en av dina fyra Expo-moduler – den är ett eget krav (se nedan).
 
-## Get a fresh project
+### Navigering
 
-When you're ready, run:
+Appen ska använda **Expo Router** för navigering. Det är Expos filbaserade router och standardvalet i `create-expo-app`. Vi går igenom den på föreläsning 2 (onsdag 23 september).
 
-```bash
-npm run reset-project
-```
+Det räcker inte med två skärmar som aldrig pratar med varandra – navigeringen ska göra appen bättre. Minst en skärm ska ta emot en parameter (t.ex. `app/detaljer/[id].tsx` + `useLocalSearchParams`).
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+---
 
-### Other setup steps
+## Inlämning
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+**Du MÅSTE använda Git och GitHub för att bli godkänd på uppgiften.** Commit:a löpande under arbetets gång, inte allt på slutet – historiken är en del av det du visar upp.
 
-## Learn more
+Inlämningen sker via läroplattformen. Zippa projektmappen **utan `node_modules`**. Mappen `.git` måste följa med så att jag hittar till ditt publika repo.
 
-To learn more about developing your project with Expo, look at the following resources:
+### README.md
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+I projektmappen ska det, utöver all kod, finnas en `README.md` som innehåller:
 
-## Join the community
+1. **Titel** på projektet
+2. **Beskrivning** – vad appen gör och vem den är för
+3. **Så bygger och kör du projektet** – steg för steg, från `git clone` till appen igång i Expo Go
+4. **Använda RN-komponenter** – lista dem och skriv en rad om vad var och en används till
+5. **Använda Expo SDK-moduler** – samma sak
+6. **Uppfyllda krav** – kryssa av listorna längst ner i det här dokumentet
 
-Join our community of developers creating universal apps.
+Skriv README:n för någon som aldrig sett projektet. Det är den jag läser först.
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+---
+
+## Krav för godkänt (G)
+
+[] 1. Projektet använder minst **4 RN-komponenter** och minst **4 moduler från Expo SDK**
+[] 2. De använda komponenterna och modulerna är **antecknade i README.md**, tillsammans med en lista över uppfyllda krav
+[] 3. **Expo Router** används för navigering i appen, och minst en skärm tar emot en parameter
+[] 4. **Git och GitHub** har använts, med commits spridda över arbetets gång
+[] 5. Projektmappen innehåller en **README.md** enligt beskrivningen ovan
+[] 6. Uppgiften är **inlämnad i tid**
+[] 7. **Muntlig presentation** är genomförd
+
+## Krav för väl godkänt (VG)
+
+[] 1. Alla punkter för godkänt är uppfyllda
+[] 2. **Ytterligare en valfri extern modul** används i projektet från [reactnative.directory](https://reactnative.directory)
+[] 3. Appen **hämtar data från ett Web-API**
+[] 4. **Användningen av AI-verktyg dokumenteras i README** – vilka verktyg du använt, till vad, och hur du verifierat att koden gör det du tror. Ta även upp det i presentationens reflekterande del.
+
+---
+
+## Tips
+
+**Externa paket och New Architecture.** React Native kör sedan version 0.82 enbart den nya arkitekturen. Äldre paket kan sakna stöd. Sök paket på [reactnative.directory](https://reactnative.directory) och filtrera på **Expo Go** och **New Architecture** – då slipper du paket som inte går att köra.
+
+**Paket med egen native-kod fungerar inte i Expo Go.** Har paketet en `ios/`- eller `android/`-mapp kräver det en development build. Håll dig till Expo SDK och rena JS-paket så räcker Expo Go hela vägen.
+
+**AI-regeln i kursen: AI får skriva, du måste förstå och verifiera.** Du ska kunna förklara varje rad i ditt projekt på presentationen. Kod du inte kan redogöra för räknas inte som din.
+
+**Börja smått.** En app med fyra komponenter som fungerar är bättre än en app med tolv som inte gör det.
