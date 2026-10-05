@@ -1,5 +1,10 @@
+import { FaultProvider } from "@/context/FaultContext";
 import { Stack } from "expo-router";
 
 export default function RootLayout() {
-  return <Stack />;
+  return (
+    <FaultProvider>
+      <Stack />
+    </FaultProvider>
+  );
 }

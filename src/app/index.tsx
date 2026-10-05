@@ -1,17 +1,20 @@
-import { mockedFaults } from "@/data/mockedFaults";
+import { useFaults } from "@/context/FaultContext";
 import { Link } from "expo-router";
 import { FlatList, StyleSheet, Text, View } from "react-native";
 
 export default function Index() {
-  const fault = mockedFaults;
+  const { faults } = useFaults();
+
   return (
     <View style={s.root}>
-      <Text style={s.list}>Felanmälningar</Text>
+      <Text style={s.heading}>Felanmälningar</Text>
       <FlatList
-        data={mockedFaults}
+        style={s.list}
+        contentContainerStyle={s.listContent}
+        data={faults}
         renderItem={({ item }) => (
-          <View>
-            <Text style={s.list}>
+          <View style={s.item}>
+            <Text style={s.itemText}>
               {item.title} - {item.category}
             </Text>
           </View>
@@ -29,22 +32,41 @@ export default function Index() {
 
 const s = StyleSheet.create({
   root: {
+    flex: 1,
     padding: 12,
     gap: 8,
+  },
+  heading: {
+    fontSize: 24,
+    fontWeight: "700",
+  },
+  list: {
+    flex: 1,
+  },
+  listContent: {
+    gap: 8,
+  },
+  item: {
+    borderWidth: 1,
+    borderColor: "#767070",
+    borderRadius: 8,
+    padding: 12,
+    backgroundColor: "#FFF",
+  },
+  itemText: {
+    fontSize: 16,
+    fontWeight: "600",
   },
   footer: {
     alignItems: "center",
     justifyContent: "flex-start",
     gap: 2,
+    padding: 12,
     backgroundColor: "#FFF",
     borderRadius: 50,
   },
   link: {
     fontSize: 24,
     fontWeight: "800",
-  },
-  list: {
-    fontSize: 20,
-    fontWeight: "600",
   },
 });
