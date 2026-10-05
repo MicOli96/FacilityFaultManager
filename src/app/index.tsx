@@ -1,23 +1,27 @@
 import { useFaults } from "@/context/FaultContext";
 import { Link } from "expo-router";
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
 
 export default function Index() {
   const { faults } = useFaults();
 
   return (
     <View style={s.root}>
-      <Text style={s.heading}>Felanmälningar</Text>
       <FlatList
         style={s.list}
         contentContainerStyle={s.listContent}
         data={faults}
         renderItem={({ item }) => (
-          <View style={s.item}>
-            <Text style={s.itemText}>
-              {item.title} - {item.category}
-            </Text>
-          </View>
+          <Link
+            href={{ pathname: "/fault/[id]", params: { id: item.id } }}
+            asChild
+          >
+            <Pressable style={s.item}>
+              <Text style={s.itemText}>
+                {item.title} - {item.category}
+              </Text>
+            </Pressable>
+          </Link>
         )}
       ></FlatList>
 
@@ -35,10 +39,6 @@ const s = StyleSheet.create({
     flex: 1,
     padding: 12,
     gap: 8,
-  },
-  heading: {
-    fontSize: 24,
-    fontWeight: "700",
   },
   list: {
     flex: 1,
