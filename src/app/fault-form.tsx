@@ -1,6 +1,7 @@
 import { useFaults } from "@/context/FaultContext";
 import { categories, Category } from "@/data/categories";
 import { Fault } from "@/types/fault";
+import * as Haptics from "expo-haptics";
 import { router } from "expo-router";
 import { useState } from "react";
 import {
@@ -33,6 +34,7 @@ export default function FaultForm() {
         "Fyll i alla fält",
         "Titel, beskrivning, plats och kategori måste fyllas i.",
       );
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
       return;
     }
 
@@ -45,6 +47,7 @@ export default function FaultForm() {
       createdAt: new Date().toISOString(),
     };
 
+    Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
     addFault(newFault);
     router.back();
   }
@@ -83,7 +86,10 @@ export default function FaultForm() {
           <Pressable
             key={category}
             style={[s.chip, category === selectedCategory && s.chipSelected]}
-            onPress={() => setSelectedCategory(category)}
+            onPress={() => {
+              setSelectedCategory(category);
+              Haptics.selectionAsync();
+            }}
           >
             <Text style={category === selectedCategory && s.chipTextSelected}>
               {category}
