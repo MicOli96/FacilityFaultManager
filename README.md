@@ -115,7 +115,47 @@ src/
 └── utils/
     └── fika.ts           Räknar ut tiden till nästa fika
 ```
+## AI användning
 
+``` 
+Verktyg
+
+Under projektet användes Claude Code, modell Opus 5.5
+
+Uppdelning av arbetet
+
+idén till projektet delades med Claude och en plan sattes upp.
+Till en början användes Claude som en "kollega" där vi diskuterade fram och tillbaka, AI:n föreslog förbättringar eller förenklingar av kod. Efter samtal med lärare om vad jag ville få ut av inlämningen ändrades planen. En del av appen var redan färdig därför bestämdes ett nytt upplägg, kan läsas under **CLAUDE.md**.
+
+- AI:n skrev vanlig kod i små etapper: plan, godkännande av mig,  AI skriver, jag granskar, jag testar, commit.
+- Själv skrev jag all Expo SDK-kod, eftersom jag ville öva på den delen och att läsa dokumentationen. AI:n förklarade begreppen, granskade och ställde frågor, och jag förklarade tillbaka.
+
+Vilka delar jag skrev och vilka delar AI:n skrev syns på commithistoriken, dock är commit 3a93d76 skriven ihop med AI. Jag ändrade meddelandet efter att AI:n commitat då jag inte tyckte att meddelandet stämde helt och då försvann AI stämpeln.
+
+Hur koden har verifierats
+
+- npx tsc --noEmit före varje commit, för typfel i hela projektet.
+- Testade på telefonen, även felfallen: tomma fält, avbrutet bildval, nekad platsbehörighet, flygplansläge och omstart av appen (AsyncStorage).
+- Granskningsfrågor: efter varje etapp svarade jag på frågor om koden. Kunde jag inte svara förstod jag inte koden än.
+- Förklarade tillbaka min SDK-kod med egna ord.
+- Jämförde plan och resultat efter varje etapp.
+- Kontrollerade AI:ns påståenden mot dokumentationen, t.ex. Expos dokumentation för SDK 57.
+
+Tillfällen då jag styrde eller rättade AI:n
+
+1. Bildbehörigheten: AI:n sa att behörighetsfrågan inte behövdes. Jag ifrågasatte det, resonerade om användarens trygghet och kontrollerade sedan på iPhone, som själv förklarar att appen bara får den valda bilden. jag har skärmdumpen.
+2. "Koden är densamma": Bad AI:n flytta ut SDK kod efter att jag var färdig då `src/app/fault-form.tsx` blev stor enligt mig. jag såg att den lagt till returtyper och ändrat logiken, och bad den ångra allt.
+3. Planen följdes inte helt: i etapp 2 lade AI:n till saker som inte stod i planen. jag märkte det och ifrågasatte.
+4. Ändringar jag inte bett om: i början ändrade AI:n i min kod när jag bara ville ha svar, och jag bad den ångra det. Detta var innan upplägget men AI:n "satte i minnet" att inte ändra kod om jag bara ställer en fråga.
+5. Börja om: jag lät AI:n skriva fas B–D, insåg att jag inte lärde mig och bad den ta bort allt och förklara steg för steg i stället. Det var i detta skedet som jag skrev hur jag ville ha det och hur jag ville lära mig på ett sådant förklarande sätt att vi skapade upplägget.
+6. Backenden togs bort: AI:n byggde en backend, men på grund av brandväggen, tiden och risken på presentationen valde jag bort den.
+7. Eget val av API: AI:n rekommenderade väder API:t för att det skulle passa in men jag valde en annan approach.
+
+Reflektion
+Jag har varit lite rädd för att använda AI eftersom jag var orolig att inte lära mig ordentligt. Men efter upplägget har det gått bra, jag fick se till ibland när det inte följdes men har gått mestadels bra. Använde AI för mycket som jag redan kan men passade på att skriva ny typ av kod själv. Oavsett om det var jag eller AI så "pratade" vi om koden och min förståelse för att se så jag inte missuppfattat något jag läst i dokumentation tex. Eftersom jag också granskade koden som AI skrivit ser jag det som en repetition och har därmed blivit mer bekväm med att släppa in AI i arbetet.
+
+Det som underlättades av AI användandet var att jag kunde lägga mer tid på saker jag kanske inte kunde ordentligt eller förstod. Skapade lite styling till en början men lät AI styla efter att jag gjort grunderna, ansåg inte att det var den viktigaste delen för mig. Det som dock var jobbigt med AI användandet var just när den gjorde lite som den ville eller sa något som inte stämde.
+```
 ## Uppfyllda krav
 
 ### Krav för godkänt (G)
@@ -133,4 +173,4 @@ src/
 - [ ] 1. Alla punkter för godkänt är uppfyllda
 - [x] 2. **Ytterligare en valfri extern modul** används i projektet från [reactnative.directory](https://reactnative.directory)
 - [x] 3. Appen **hämtar data från ett Web-API**
-- [ ] 4. **Användningen av AI-verktyg dokumenteras i README** – vilka verktyg du använt, till vad, och hur du verifierat att koden gör det du tror. Ta även upp det i presentationens reflekterande del.
+- [x] 4. **Användningen av AI-verktyg dokumenteras i README** – vilka verktyg du använt, till vad, och hur du verifierat att koden gör det du tror. Ta även upp det i presentationens reflekterande del.
