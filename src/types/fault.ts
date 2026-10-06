@@ -7,4 +7,5 @@ export type Fault = {
     location: string;
     category: Category;
     createdAt: string;
+    imageUri?: string;
 };
