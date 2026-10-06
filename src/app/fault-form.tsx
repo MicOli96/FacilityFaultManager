@@ -2,6 +2,7 @@ import { useFaults } from "@/context/FaultContext";
 import { categories, Category } from "@/data/categories";
 import { Fault } from "@/types/fault";
 import * as Haptics from "expo-haptics";
+import * as ImagePicker from "expo-image-picker";
 import { router } from "expo-router";
 import { useState } from "react";
 import {
@@ -19,8 +20,21 @@ export default function FaultForm() {
   const [descr, setDescr] = useState("");
   const [location, setLocation] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<Category>();
+  const [image, setImage] = useState<string | undefined>();
 
   const { addFault } = useFaults();
+
+  const pickImage = async () => {
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: "images",
+      allowsEditing: true,
+      quality: 0.7,
+    });
+
+    if (result.canceled) return;
+
+    setImage(result.assets[0].uri);
+  };
 
   function handleSave() {
     // trim() gör att "   " räknas som tomt
@@ -45,6 +59,7 @@ export default function FaultForm() {
       location: location.trim(),
       category: selectedCategory,
       createdAt: new Date().toISOString(),
+      imageUri: image,
     };
 
     Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
@@ -98,6 +113,7 @@ export default function FaultForm() {
         ))}
       </View>
 
+      <Button title="Lägg till bild" onPress={pickImage}></Button>
       <View>
         <Button title="Spara" onPress={handleSave}></Button>
       </View>
