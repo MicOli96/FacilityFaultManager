@@ -10,6 +10,7 @@ import { useState } from "react";
 import {
   Alert,
   Button,
+  Platform,
   Pressable,
   ScrollView,
   StyleSheet,
@@ -121,11 +122,14 @@ export default function FaultForm() {
         value={location}
         onChangeText={setLocation}
       ></TextInput>
-      <Button
-        title={loading ? "Hämtar plats" : "Använd min plats"}
-        onPress={getLocation}
-        disabled={loading}
-      />
+      <View style={s.secondaryButton}>
+        <Button
+          title={loading ? "Hämtar plats" : "Använd min plats"}
+          onPress={getLocation}
+          disabled={loading}
+          color="#1565C0"
+        />
+      </View>
 
       <Text style={s.label}>Kategori</Text>
       <View style={s.categoryList}>
@@ -145,11 +149,18 @@ export default function FaultForm() {
         ))}
       </View>
 
-      <Button title="Lägg till bild" onPress={pickImage} />
+      <View style={s.secondaryButton}>
+        <Button title="Lägg till bild" onPress={pickImage} color="#1565C0" />
+      </View>
       {image && <Image source={{ uri: image }} style={s.image} />}
 
-      <View>
-        <Button title="Spara" onPress={handleSave} />
+      <View style={s.saveButton}>
+        {/* color betyder textfärg på iPhone men bakgrundsfärg på Android */}
+        <Button
+          title="Spara"
+          onPress={handleSave}
+          color={Platform.OS === "ios" ? "#FFF" : "#1565C0"}
+        />
       </View>
     </ScrollView>
   );
@@ -185,17 +196,32 @@ const s = StyleSheet.create({
   },
   chip: {
     borderWidth: 1,
-    borderColor: "#767070",
+    borderColor: "#D1D5DB",
     borderRadius: 20,
-    paddingVertical: 6,
-    paddingHorizontal: 12,
+    paddingVertical: 8,
+    paddingHorizontal: 14,
+    backgroundColor: "#F2F4F7",
   },
   chipSelected: {
-    backgroundColor: "#208AEF",
-    borderColor: "#208AEF",
+    backgroundColor: "#1565C0",
+    borderColor: "#1565C0",
   },
   chipTextSelected: {
     color: "#FFF",
+    fontWeight: "600",
+  },
+  // Ljusblå ruta runt knapparna för plats och bild
+  secondaryButton: {
+    borderRadius: 12,
+    backgroundColor: "#E6F1FD",
+    overflow: "hidden",
+  },
+  // Mörkblå ruta runt Spara – samma som "Ny felanmälan" på startsidan
+  saveButton: {
+    borderRadius: 12,
+    backgroundColor: "#1565C0",
+    overflow: "hidden",
+    paddingVertical: 4,
   },
   image: {
     borderRadius: 8,
