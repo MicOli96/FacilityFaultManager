@@ -2,6 +2,7 @@ import { useFaults } from "@/context/FaultContext";
 import { categories, Category } from "@/data/categories";
 import { Fault } from "@/types/fault";
 import * as Haptics from "expo-haptics";
+import { Image } from "expo-image";
 import * as ImagePicker from "expo-image-picker";
 import { router } from "expo-router";
 import { useState } from "react";
@@ -9,6 +10,7 @@ import {
   Alert,
   Button,
   Pressable,
+  ScrollView,
   StyleSheet,
   Text,
   TextInput,
@@ -68,7 +70,7 @@ export default function FaultForm() {
   }
 
   return (
-    <View style={s.root}>
+    <ScrollView style={s.root} contentContainerStyle={s.scroll}>
       <Text style={s.label}>Titel</Text>
       <TextInput
         style={s.input}
@@ -113,20 +115,24 @@ export default function FaultForm() {
         ))}
       </View>
 
-      <Button title="Lägg till bild" onPress={pickImage}></Button>
+      <Button title="Lägg till bild" onPress={pickImage} />
+      {image && <Image source={{ uri: image }} style={s.image} />}
+
       <View>
-        <Button title="Spara" onPress={handleSave}></Button>
+        <Button title="Spara" onPress={handleSave} />
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
 const s = StyleSheet.create({
   root: {
     flex: 1,
+    backgroundColor: "#FFF",
+  },
+  scroll: {
     padding: 12,
     gap: 12,
-    backgroundColor: "#FFF",
   },
   label: {
     fontSize: 16,
@@ -160,5 +166,10 @@ const s = StyleSheet.create({
   },
   chipTextSelected: {
     color: "#FFF",
+  },
+  image: {
+    borderRadius: 8,
+    height: 400,
+    width: "auto",
   },
 });

@@ -1,4 +1,5 @@
 import { useFaults } from "@/context/FaultContext";
+import { Image } from "expo-image";
 import { useLocalSearchParams } from "expo-router";
 import { StyleSheet, Text, View } from "react-native";
 
@@ -33,6 +34,13 @@ export default function FaultDetails() {
 
       <Text style={s.label}>Beskrivning</Text>
       <Text style={s.value}>{fault.description}</Text>
+
+      {fault.imageUri && (
+        <>
+          <Text style={s.label}>Bild</Text>
+          <Image source={fault.imageUri} style={s.image}></Image>
+        </>
+      )}
     </View>
   );
 }
@@ -57,5 +65,10 @@ const s = StyleSheet.create({
   },
   value: {
     fontSize: 16,
+  },
+  image: {
+    borderRadius: 8,
+    height: 400,
+    width: "auto",
   },
 });
