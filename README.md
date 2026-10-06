@@ -1,86 +1,115 @@
-# Inlämning 1 React Native
+# FacilityFaultManager
 
-**Kurs:** Applikationsutveckling (APP) SUVNET25
-**Arbetsform:** Individuellt
-**Utlämnad:** måndag 21 september 2026
-**Deadline:** onsdag 7 oktober 2026 20:00
-**Presentation:** onsdag 7 oktober 2026
-**Kompletteringsdeadline:** onsdag 28 oktober 2026 20:00
+En app för att rapportera och hålla koll på fel i fastigheter, byggd med React Native, Expo och TypeScript.
 
----
+## Beskrivning
 
-## Uppgiften
+FacilityFaultManager är till för fastighetsskötare och hyresgäster som vill rapportera fel i en fastighet – en trasig lampa, en läckande kran eller en dörr som inte går att låsa – och få en samlad överblick över alla felanmälningar.
 
-Du ska individuellt skapa en nativ app med hjälp av React Native (RN), Expo och TypeScript. Vad du bygger är valfritt, välj något litet nog att bli färdigt och stort nog att vara intressant.
+**Det här kan du göra i appen:**
 
-Appen ska använda minst **4 komponenter från React Native** och minst **4 moduler från Expo SDK**.
+- **Se alla felanmälningar** i en lista, med den nyaste överst.
+- **Skapa en ny felanmälan** med titel, beskrivning, plats och kategori (El, VVS, Ventilation, Lås eller Övrigt). Appen kontrollerar att alla fält är ifyllda innan den sparar.
+- **Fylla i platsen automatiskt** med telefonens GPS. Adressen går alltid att ändra för hand, till exempel om du skriver anmälan hemma men felet finns någon annanstans.
+- **Bifoga en bild** från telefonens bildgalleri.
+- **Öppna en felanmälan** och se all information om den, inklusive bilden.
+- **Känna i handen** att något hänt – telefonen vibrerar lätt när du väljer kategori, sparar eller har glömt fylla i något.
 
-### Vad räknas som vad?
+> **Obs:** Felanmälningarna sparas i appens minne. Appen startar med tio exempel-felanmälningar, och nya felanmälningar försvinner när appen startas om.
 
-**React Native-komponenter**
-Byggstenarna som följer med RN självt. Du importerar dem från `react-native`.
-Exempelvis: `View`, `Text`, `Image`, `Pressable`, `TextInput`, `ScrollView`, `FlatList`, `Modal` & `Switch`.
+## Så bygger och kör du projektet
 
-**Expo SDK-moduler**
-Paket som ger dig tillgång till telefonens funktioner. Du installerar dem med `npx expo install`.
-Exempelvis: `expo-location`, `expo-camera`, `expo-image-picker`, `expo-haptics`, `expo-notifications`, `expo-sensors`, `expo-file-system`.
+**Det här behöver du:**
 
-Tänk på att `StyleSheet` är ett API, inte en komponent, och räknas inte. Expo Router räknas inte som en av dina fyra Expo-moduler – den är ett eget krav (se nedan).
+- [Node.js](https://nodejs.org/) (LTS-versionen) och Git på datorn
+- Appen **Expo Go** på din telefon ([iOS](https://apps.apple.com/app/expo-go/id982107779) / [Android](https://play.google.com/store/apps/details?id=host.exp.exponent)). Projektet använder Expo SDK 57, så Expo Go behöver vara uppdaterad.
+- Telefonen och datorn måste vara anslutna till **samma wifi**.
 
-### Navigering
+**Steg för steg:**
 
-Appen ska använda **Expo Router** för navigering. Det är Expos filbaserade router och standardvalet i `create-expo-app`. Vi går igenom den på föreläsning 2 (onsdag 23 september).
+1. Klona projektet och gå in i mappen:
 
-Det räcker inte med två skärmar som aldrig pratar med varandra – navigeringen ska göra appen bättre. Minst en skärm ska ta emot en parameter (t.ex. `app/detaljer/[id].tsx` + `useLocalSearchParams`).
+   ```bash
+   git clone https://github.com/MicOli96/FacilityFaultManager.git
+   cd FacilityFaultManager
+   ```
 
----
+2. Installera paketen:
 
-## Inlämning
+   ```bash
+   npm install
+   ```
 
-**Du MÅSTE använda Git och GitHub för att bli godkänd på uppgiften.** Commit:a löpande under arbetets gång, inte allt på slutet – historiken är en del av det du visar upp.
+3. Starta utvecklingsservern:
 
-Inlämningen sker via läroplattformen. Zippa projektmappen **utan `node_modules`**. Mappen `.git` måste följa med så att jag hittar till ditt publika repo.
+   ```bash
+   npx expo start
+   ```
 
-### README.md
+4. Öppna appen på telefonen:
+   - **iOS:** skanna QR-koden i terminalen med kameran och öppna länken i Expo Go.
+   - **Android:** öppna Expo Go och skanna QR-koden därifrån.
 
-I projektmappen ska det, utöver all kod, finnas en `README.md` som innehåller:
+5. Första gången du trycker på **Använd min plats** frågar telefonen om appen får använda din plats. Svara **Tillåt** för att testa funktionen.
 
-1. **Titel** på projektet
-2. **Beskrivning** – vad appen gör och vem den är för
-3. **Så bygger och kör du projektet** – steg för steg, från `git clone` till appen igång i Expo Go
-4. **Använda RN-komponenter** – lista dem och skriv en rad om vad var och en används till
-5. **Använda Expo SDK-moduler** – samma sak
-6. **Uppfyllda krav** – kryssa av listorna längst ner i det här dokumentet
+> Fastnar det på "Opening project..." brukar det hjälpa att köra `npx expo start --tunnel` – då går anslutningen via internet i stället för det lokala nätverket.
 
-Skriv README:n för någon som aldrig sett projektet. Det är den jag läser först.
+## Använda React Native-komponenter
 
----
+| Komponent | Används till |
+|---|---|
+| `View` | Grundbehållare för layouten på alla sidor, t.ex. raden med kategoriknappar. |
+| `Text` | All text i appen – rubriker, etiketter och innehållet i felanmälningarna. |
+| `TextInput` | Fälten för titel, beskrivning och plats i formuläret. |
+| `Pressable` | Kategoriknapparna i formuläret, och korten i listan som öppnar en felanmälan. |
+| `FlatList` | Listan med alla felanmälningar på startsidan. |
+| `ScrollView` | Gör formuläret scrollbart, så att spara-knappen syns även när en bild är vald. |
+| `Button` | Knapparna Spara, Lägg till bild och Använd min plats. |
 
-## Krav för godkänt (G)
+## Använda Expo SDK-moduler
 
-[] 1. Projektet använder minst **4 RN-komponenter** och minst **4 moduler från Expo SDK**
-[] 2. De använda komponenterna och modulerna är **antecknade i README.md**, tillsammans med en lista över uppfyllda krav
-[] 3. **Expo Router** används för navigering i appen, och minst en skärm tar emot en parameter
-[] 4. **Git och GitHub** har använts, med commits spridda över arbetets gång
-[] 5. Projektmappen innehåller en **README.md** enligt beskrivningen ovan
-[] 6. Uppgiften är **inlämnad i tid**
-[] 7. **Muntlig presentation** är genomförd
+| Modul | Används till |
+|---|---|
+| `expo-location` | Hämtar telefonens position och gör om den till en adress, som fylls i i platsfältet. |
+| `expo-image-picker` | Öppnar telefonens bildgalleri så att man kan välja en bild till felanmälan. |
+| `expo-image` | Visar den valda bilden – som förhandsvisning i formuläret och på detaljsidan. |
+| `expo-haptics` | Ger en lätt vibration när man väljer kategori, en "lyckades"-vibration när man sparar och en "fel"-vibration när något fält saknas. |
 
-## Krav för väl godkänt (VG)
+**Navigering:** appen använder **Expo Router**. Startsidan (`src/app/index.tsx`) visar listan, formuläret ligger i `src/app/fault-form.tsx`, och detaljsidan `src/app/fault/[id].tsx` tar emot felanmälans id som parameter och hämtar det med `useLocalSearchParams`.
 
-[] 1. Alla punkter för godkänt är uppfyllda
-[] 2. **Ytterligare en valfri extern modul** används i projektet från [reactnative.directory](https://reactnative.directory)
-[] 3. Appen **hämtar data från ett Web-API**
-[] 4. **Användningen av AI-verktyg dokumenteras i README** – vilka verktyg du använt, till vad, och hur du verifierat att koden gör det du tror. Ta även upp det i presentationens reflekterande del.
+## Projektstruktur
 
----
+```
+src/
+├── app/                  Sidor (Expo Router)
+│   ├── _layout.tsx         Navigering och rubriker
+│   ├── index.tsx           Listan med felanmälningar
+│   ├── fault-form.tsx      Formulär för ny felanmälan
+│   └── fault/[id].tsx      Detaljsida för en felanmälan
+├── context/
+│   └── FaultContext.tsx  Gemensam lista som alla sidor når
+├── data/
+│   ├── categories.ts     Kategorierna
+│   └── mockedFaults.ts   Exempel-felanmälningar
+└── types/
+    └── fault.ts          Typen för en felanmälan
+```
 
-## Tips
+## Uppfyllda krav
 
-**Externa paket och New Architecture.** React Native kör sedan version 0.82 enbart den nya arkitekturen. Äldre paket kan sakna stöd. Sök paket på [reactnative.directory](https://reactnative.directory) och filtrera på **Expo Go** och **New Architecture** – då slipper du paket som inte går att köra.
+### Krav för godkänt (G)
 
-**Paket med egen native-kod fungerar inte i Expo Go.** Har paketet en `ios/`- eller `android/`-mapp kräver det en development build. Håll dig till Expo SDK och rena JS-paket så räcker Expo Go hela vägen.
+- [x] 1. Projektet använder minst **4 RN-komponenter** och minst **4 moduler från Expo SDK**
+- [x] 2. De använda komponenterna och modulerna är **antecknade i README.md**, tillsammans med en lista över uppfyllda krav
+- [x] 3. **Expo Router** används för navigering i appen, och minst en skärm tar emot en parameter
+- [x] 4. **Git och GitHub** har använts, med commits spridda över arbetets gång
+- [x] 5. Projektmappen innehåller en **README.md** enligt beskrivningen ovan
+- [ ] 6. Uppgiften är **inlämnad i tid**
+- [ ] 7. **Muntlig presentation** är genomförd
 
-**AI-regeln i kursen: AI får skriva, du måste förstå och verifiera.** Du ska kunna förklara varje rad i ditt projekt på presentationen. Kod du inte kan redogöra för räknas inte som din.
+### Krav för väl godkänt (VG)
 
-**Börja smått.** En app med fyra komponenter som fungerar är bättre än en app med tolv som inte gör det.
+- [ ] 1. Alla punkter för godkänt är uppfyllda
+- [ ] 2. **Ytterligare en valfri extern modul** används i projektet från [reactnative.directory](https://reactnative.directory)
+- [ ] 3. Appen **hämtar data från ett Web-API**
+- [ ] 4. **Användningen av AI-verktyg dokumenteras i README** – vilka verktyg du använt, till vad, och hur du verifierat att koden gör det du tror. Ta även upp det i presentationens reflekterande del.
