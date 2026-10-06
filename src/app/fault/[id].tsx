@@ -22,7 +22,9 @@ export default function FaultDetails() {
       <Text style={s.heading}>{fault.title}</Text>
 
       <Text style={s.label}>Kategori</Text>
-      <Text style={s.value}>{fault.category}</Text>
+      <View style={s.badge}>
+        <Text style={s.badgeText}>{fault.category}</Text>
+      </View>
 
       <Text style={s.label}>Plats</Text>
       <Text style={s.value}>{fault.location}</Text>
@@ -65,6 +67,19 @@ const s = StyleSheet.create({
   },
   value: {
     fontSize: 16,
+  },
+  // alignSelf gör att etiketten bara blir så bred som texten
+  badge: {
+    alignSelf: "flex-start",
+    paddingVertical: 4,
+    paddingHorizontal: 10,
+    borderRadius: 20,
+    backgroundColor: "#E6F1FD",
+  },
+  badgeText: {
+    fontSize: 13,
+    fontWeight: "600",
+    color: "#1565C0",
   },
   image: {
     borderRadius: 8,

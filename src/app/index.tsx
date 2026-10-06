@@ -19,9 +19,10 @@ export default function Index() {
             asChild
           >
             <Pressable style={s.item}>
-              <Text style={s.itemText}>
-                {item.title} - {item.category}
-              </Text>
+              <Text style={s.itemText}>{item.title}</Text>
+              <View style={s.badge}>
+                <Text style={s.badgeText}>{item.category}</Text>
+              </View>
             </Pressable>
           </Link>
         )}
@@ -49,6 +50,9 @@ const s = StyleSheet.create({
     gap: 8,
   },
   item: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
     borderWidth: 1,
     borderColor: "#767070",
     borderRadius: 8,
@@ -56,19 +60,33 @@ const s = StyleSheet.create({
     backgroundColor: "#FFF",
   },
   itemText: {
+    flex: 1,
     fontSize: 16,
     fontWeight: "600",
   },
-  footer: {
-    alignItems: "center",
-    justifyContent: "flex-start",
-    gap: 2,
-    padding: 12,
-    backgroundColor: "#FFF",
-    borderRadius: 50,
+  badge: {
+    paddingVertical: 4,
+    paddingHorizontal: 10,
+    borderRadius: 20,
+    backgroundColor: "#E6F1FD",
   },
+  badgeText: {
+    fontSize: 13,
+    fontWeight: "600",
+    color: "#1565C0",
+  },
+  // View:n är själva "knappen" – mörkblå bakgrund och rundade hörn
+  footer: {
+    borderRadius: 12,
+    backgroundColor: "#1565C0",
+    overflow: "hidden",
+  },
+  // Länktexten fyller hela View:n, så hela knappen går att trycka på
   link: {
-    fontSize: 24,
+    paddingVertical: 16,
+    textAlign: "center",
+    fontSize: 20,
     fontWeight: "800",
+    color: "#FFF",
   },
 });
