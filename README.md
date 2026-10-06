@@ -15,7 +15,7 @@ FacilityFaultManager är till för fastighetsskötare och hyresgäster som vill 
 - **Öppna en felanmälan** och se all information om den, inklusive bilden.
 - **Känna i handen** att något hänt – telefonen vibrerar lätt när du väljer kategori, sparar eller har glömt fylla i något.
 
-> **Obs:** Felanmälningarna sparas i appens minne. Appen startar med tio exempel-felanmälningar, och nya felanmälningar försvinner när appen startas om.
+> **Obs:** Första gången appen startar visas tio exempel-felanmälningar. Nya felanmälningar sparas i telefonen och finns kvar när appen startas om.
 
 ## Så bygger och kör du projektet
 
@@ -75,7 +75,15 @@ FacilityFaultManager är till för fastighetsskötare och hyresgäster som vill 
 | `expo-image` | Visar den valda bilden – som förhandsvisning i formuläret och på detaljsidan. |
 | `expo-haptics` | Ger en lätt vibration när man väljer kategori, en "lyckades"-vibration när man sparar och en "fel"-vibration när något fält saknas. |
 
-**Navigering:** appen använder **Expo Router**. Startsidan (`src/app/index.tsx`) visar listan, formuläret ligger i `src/app/fault-form.tsx`, och detaljsidan `src/app/fault/[id].tsx` tar emot felanmälans id som parameter och hämtar det med `useLocalSearchParams`.
+## Extern modul
+
+| Modul | Används till |
+|---|---|
+| [`@react-native-async-storage/async-storage`](https://reactnative.directory/package/@react-native-async-storage/async-storage) | Sparar felanmälningarna i telefonen, så att de finns kvar när appen startas om. |
+
+## Navigering
+
+Appen använder **Expo Router**. Startsidan (`src/app/index.tsx`) visar listan, formuläret ligger i `src/app/fault-form.tsx`, och detaljsidan `src/app/fault/[id].tsx` tar emot felanmälans id som parameter och hämtar det med `useLocalSearchParams`.
 
 ## Projektstruktur
 
@@ -110,6 +118,6 @@ src/
 ### Krav för väl godkänt (VG)
 
 - [ ] 1. Alla punkter för godkänt är uppfyllda
-- [ ] 2. **Ytterligare en valfri extern modul** används i projektet från [reactnative.directory](https://reactnative.directory)
+- [x] 2. **Ytterligare en valfri extern modul** används i projektet från [reactnative.directory](https://reactnative.directory)
 - [ ] 3. Appen **hämtar data från ett Web-API**
 - [ ] 4. **Användningen av AI-verktyg dokumenteras i README** – vilka verktyg du använt, till vad, och hur du verifierat att koden gör det du tror. Ta även upp det i presentationens reflekterande del.
