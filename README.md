@@ -14,6 +14,7 @@ FacilityFaultManager är till för fastighetsskötare och hyresgäster som vill 
 - **Bifoga en bild** från telefonens bildgalleri.
 - **Öppna en felanmälan** och se all information om den, inklusive bilden.
 - **Känna i handen** att något hänt – telefonen vibrerar lätt när du väljer kategori, sparar eller har glömt fylla i något.
+- **Hålla koll på fikan** ☕ – överst på startsidan visar fikaklockan veckodag, vecka och hur länge det är kvar till nästa fika (09:30 och 14:30). På lediga dagar blir det fika hemma.
 
 > **Obs:** Första gången appen startar visas tio exempel-felanmälningar. Nya felanmälningar sparas i telefonen och finns kvar när appen startas om.
 
@@ -81,6 +82,12 @@ FacilityFaultManager är till för fastighetsskötare och hyresgäster som vill 
 |---|---|
 | [`@react-native-async-storage/async-storage`](https://reactnative.directory/package/@react-native-async-storage/async-storage) | Sparar felanmälningarna i telefonen, så att de finns kvar när appen startas om. |
 
+## Web-API
+
+| API | Används till |
+|---|---|
+| [Svenska dagar](https://sholiday.faboul.se/) | Hämtar veckodag, veckonummer och om dagen är arbetsfri. Visas i fikaklockan på startsidan. Ingen API-nyckel behövs. |
+
 ## Navigering
 
 Appen använder **Expo Router**. Startsidan (`src/app/index.tsx`) visar listan, formuläret ligger i `src/app/fault-form.tsx`, och detaljsidan `src/app/fault/[id].tsx` tar emot felanmälans id som parameter och hämtar det med `useLocalSearchParams`.
@@ -94,13 +101,19 @@ src/
 │   ├── index.tsx           Listan med felanmälningar
 │   ├── fault-form.tsx      Formulär för ny felanmälan
 │   └── fault/[id].tsx      Detaljsida för en felanmälan
+├── api/
+│   └── swedishDay.ts     Hämtar dagens datum från Svenska dagar-API:t
+├── components/
+│   └── FikaClock.tsx     Fikaklockan överst på startsidan
 ├── context/
 │   └── FaultContext.tsx  Gemensam lista som alla sidor når
 ├── data/
 │   ├── categories.ts     Kategorierna
 │   └── mockedFaults.ts   Exempel-felanmälningar
-└── types/
-    └── fault.ts          Typen för en felanmälan
+├── types/
+│   └── fault.ts          Typen för en felanmälan
+└── utils/
+    └── fika.ts           Räknar ut tiden till nästa fika
 ```
 
 ## Uppfyllda krav
@@ -119,5 +132,5 @@ src/
 
 - [ ] 1. Alla punkter för godkänt är uppfyllda
 - [x] 2. **Ytterligare en valfri extern modul** används i projektet från [reactnative.directory](https://reactnative.directory)
-- [ ] 3. Appen **hämtar data från ett Web-API**
+- [x] 3. Appen **hämtar data från ett Web-API**
 - [ ] 4. **Användningen av AI-verktyg dokumenteras i README** – vilka verktyg du använt, till vad, och hur du verifierat att koden gör det du tror. Ta även upp det i presentationens reflekterande del.

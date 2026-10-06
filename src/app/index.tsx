@@ -1,3 +1,4 @@
+import FikaClock from "@/components/FikaClock";
 import { useFaults } from "@/context/FaultContext";
 import { Link } from "expo-router";
 import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
@@ -7,6 +8,7 @@ export default function Index() {
 
   return (
     <View style={s.root}>
+      <FikaClock />
       <FlatList
         style={s.list}
         contentContainerStyle={s.listContent}
