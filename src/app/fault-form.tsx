@@ -4,6 +4,7 @@ import { Fault } from "@/types/fault";
 import * as Haptics from "expo-haptics";
 import { Image } from "expo-image";
 import * as ImagePicker from "expo-image-picker";
+import * as Location from "expo-location";
 import { router } from "expo-router";
 import { useState } from "react";
 import {
@@ -23,6 +24,7 @@ export default function FaultForm() {
   const [location, setLocation] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<Category>();
   const [image, setImage] = useState<string | undefined>();
+  const [loading, setLoading] = useState(false);
 
   const { addFault } = useFaults();
 
@@ -36,6 +38,29 @@ export default function FaultForm() {
     if (result.canceled) return;
 
     setImage(result.assets[0].uri);
+  };
+
+  const getLocation = async () => {
+    const { status } = await Location.requestForegroundPermissionsAsync();
+
+    if (status !== "granted") {
+      Alert.alert("Tillåtelse nekad", "Skriv adressen manuellt");
+      return;
+    }
+    setLoading(true);
+    try {
+      const position = await Location.getCurrentPositionAsync();
+
+      const addresses = await Location.reverseGeocodeAsync(position.coords);
+
+      const addressText = `${addresses[0].street} ${addresses[0].streetNumber} ${addresses[0].postalCode}`;
+
+      setLocation(addressText);
+    } catch {
+      Alert.alert("Platsen kunde inte hittas", "Skriv in platsen själv");
+    } finally {
+      setLoading(false);
+    }
   };
 
   function handleSave() {
@@ -96,6 +121,11 @@ export default function FaultForm() {
         value={location}
         onChangeText={setLocation}
       ></TextInput>
+      <Button
+        title={loading ? "Hämtar plats" : "Använd min plats"}
+        onPress={getLocation}
+        disabled={loading}
+      />
 
       <Text style={s.label}>Kategori</Text>
       <View style={s.categoryList}>
