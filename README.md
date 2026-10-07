@@ -165,12 +165,12 @@ Det som underlättades av AI användandet var att jag kunde lägga mer tid på s
 - [x] 3. **Expo Router** används för navigering i appen, och minst en skärm tar emot en parameter
 - [x] 4. **Git och GitHub** har använts, med commits spridda över arbetets gång
 - [x] 5. Projektmappen innehåller en **README.md** enligt beskrivningen ovan
-- [ ] 6. Uppgiften är **inlämnad i tid**
-- [ ] 7. **Muntlig presentation** är genomförd
+- [x] 6. Uppgiften är **inlämnad i tid**
+- [x] 7. **Muntlig presentation** är genomförd
 
 ### Krav för väl godkänt (VG)
 
-- [ ] 1. Alla punkter för godkänt är uppfyllda
+- [x] 1. Alla punkter för godkänt är uppfyllda
 - [x] 2. **Ytterligare en valfri extern modul** används i projektet från [reactnative.directory](https://reactnative.directory)
 - [x] 3. Appen **hämtar data från ett Web-API**
 - [x] 4. **Användningen av AI-verktyg dokumenteras i README** – vilka verktyg du använt, till vad, och hur du verifierat att koden gör det du tror. Ta även upp det i presentationens reflekterande del.
